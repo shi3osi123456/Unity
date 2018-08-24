@@ -23,6 +23,7 @@ namespace VRStandardAssets.Common
         private static int s_HighScore;                             // Used to store the highscore for the current game type.
         private static int s_Score;                                 // Used to store the current game's score.
         private static string s_CurrentGame;                        // The name of the current game type.
+        private static int comb;                                   // Used to store the comb.
 
 
         public static int HighScore { get { return s_HighScore; } }
@@ -64,17 +65,29 @@ namespace VRStandardAssets.Common
 
         public static void CalScore(int score)
         {
-            if (score == -2)
+            switch (score)
             {
-                s_Score = 0;
-            } 
-            else 
-            {
-                // Add to the current score and check if the high score needs to be set.
-                s_Score += score;
-                CheckHighScore();
+                case 1:
+                    s_Score += score;
+                    comb += 1;
+                    break;
+                case -1:
+                    s_Score += score;
+                    comb = 0;
+                    break;
+                case -2:
+                    s_Score = 0;
+                    comb = 0;
+                    break;
             }
 
+            CheckHighScore();
+
+            if (comb == 5)
+            {
+                s_Score += 2;
+                comb = 0;
+            }
         }
 
         public static int GetHighScore()

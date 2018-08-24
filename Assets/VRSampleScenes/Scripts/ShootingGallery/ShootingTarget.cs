@@ -154,7 +154,8 @@ namespace VRStandardAssets.ShootingGallery
             m_Audio.clip = m_DestroyClip;
             m_Audio.Play();
 
-            SessionData.CalScore(m_Score);                      // Calculation to the player's score
+            // Calculation to the player's score
+            SessionData.CalScore(m_Score);
 
             // Instantiate the shattered target prefab in place of this target.
             GameObject destroyedTarget = Instantiate(m_DestroyPrefab, transform.position, transform.rotation) as GameObject;
